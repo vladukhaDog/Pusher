@@ -8,18 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		61C6292428F4521600FA1839 /* PusherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C6292328F4521600FA1839 /* PusherApp.swift */; };
-		61C6292628F4521600FA1839 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C6292528F4521600FA1839 /* ContentView.swift */; };
+		61C6292628F4521600FA1839 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C6292528F4521600FA1839 /* MainView.swift */; };
 		61C6292828F4521800FA1839 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61C6292728F4521800FA1839 /* Assets.xcassets */; };
 		61C6292B28F4521800FA1839 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61C6292A28F4521800FA1839 /* Preview Assets.xcassets */; };
+		61C6293328F4545600FA1839 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C6293228F4545600FA1839 /* MainViewModel.swift */; };
+		61C6293528F4551100FA1839 /* RepositoryFunctionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C6293428F4551100FA1839 /* RepositoryFunctionsView.swift */; };
+		61C6293728F4556400FA1839 /* RepositoryFunctionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C6293628F4556400FA1839 /* RepositoryFunctionsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		61C6292028F4521600FA1839 /* Pusher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pusher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61C6292328F4521600FA1839 /* PusherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PusherApp.swift; sourceTree = "<group>"; };
-		61C6292528F4521600FA1839 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		61C6292528F4521600FA1839 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		61C6292728F4521800FA1839 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		61C6292A28F4521800FA1839 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		61C6292C28F4521800FA1839 /* Pusher.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pusher.entitlements; sourceTree = "<group>"; };
+		61C6293228F4545600FA1839 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		61C6293428F4551100FA1839 /* RepositoryFunctionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryFunctionsView.swift; sourceTree = "<group>"; };
+		61C6293628F4556400FA1839 /* RepositoryFunctionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryFunctionsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +59,10 @@
 			isa = PBXGroup;
 			children = (
 				61C6292328F4521600FA1839 /* PusherApp.swift */,
-				61C6292528F4521600FA1839 /* ContentView.swift */,
+				61C6292528F4521600FA1839 /* MainView.swift */,
+				61C6293228F4545600FA1839 /* MainViewModel.swift */,
+				61C6293428F4551100FA1839 /* RepositoryFunctionsView.swift */,
+				61C6293628F4556400FA1839 /* RepositoryFunctionsViewModel.swift */,
 				61C6292728F4521800FA1839 /* Assets.xcassets */,
 				61C6292C28F4521800FA1839 /* Pusher.entitlements */,
 				61C6292928F4521800FA1839 /* Preview Content */,
@@ -139,8 +148,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61C6292628F4521600FA1839 /* ContentView.swift in Sources */,
+				61C6293528F4551100FA1839 /* RepositoryFunctionsView.swift in Sources */,
+				61C6292628F4521600FA1839 /* MainView.swift in Sources */,
 				61C6292428F4521600FA1839 /* PusherApp.swift in Sources */,
+				61C6293328F4545600FA1839 /* MainViewModel.swift in Sources */,
+				61C6293728F4556400FA1839 /* RepositoryFunctionsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
