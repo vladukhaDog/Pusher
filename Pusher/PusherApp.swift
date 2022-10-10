@@ -12,6 +12,7 @@ struct PusherApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
+                .frame(minWidth: 500, minHeight: 500)
         }
     }
 }

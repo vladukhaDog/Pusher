@@ -18,6 +18,7 @@ class MainViewModel: ObservableObject{
         if panel.runModal() == .OK,  panel.url?.absoluteString != nil{
             if let fileNames = try? FileManager.default.contentsOfDirectory(atPath: panel.url?.path ?? ""){
                 if fileNames.contains(".git"){
+                    self.projectPath = ""
                     self.projectPath = panel.url?.path ?? ""
                 }else{
                     print("Not A Repository")

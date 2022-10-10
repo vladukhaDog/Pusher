@@ -16,12 +16,17 @@ struct MainView: View {
             } label: {
                 Text("Select Repository")
             }
-            if !vm.projectPath.isEmpty{
-                RepositoryFunctionsView(vm.projectPath)
-            }
+            VStack{
+                if !vm.projectPath.isEmpty{
+                    RepositoryFunctionsView(vm.projectPath)
+                        .id(vm.projectPath)
+                        .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .trailing)).combined(with: .opacity))
+                        
+                }
+            }.animation(.spring(), value: vm.projectPath)
         }
         .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+//        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
