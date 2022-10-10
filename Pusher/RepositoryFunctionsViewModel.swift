@@ -38,7 +38,7 @@ class RepositoryFunctionsViewModel: ObservableObject{
         }
         if !array.isEmpty{
             for item in array{
-                self.branches.append("\(item)")
+                self.branches.append("\(item.replacingOccurrences(of: "origin/", with: ""))")
             }
         }
         
@@ -49,7 +49,7 @@ class RepositoryFunctionsViewModel: ObservableObject{
     
     func commitnPush(){
         DispatchQueue.main.async {
-            let response = try? self.safeShell("cd \(self.path);git add .; git commit -m \"\(self.commitMessage)\"; git push \(self.selectedBranch)")
+            let response = try? self.safeShell("cd \(self.path);git add .; git commit -m \"\(self.commitMessage)\"; git push origin \(self.selectedBranch)")
             if let response{
                 withAnimation {
                     self.commitMessage = ""
@@ -81,7 +81,7 @@ class RepositoryFunctionsViewModel: ObservableObject{
     }
     func Pull(){
         DispatchQueue.main.async {
-            let response = try? self.safeShell("cd \(self.path); git pull \(self.selectedBranch)")
+            let response = try? self.safeShell("cd \(self.path); git pull origin \(self.selectedBranch)")
             if let response{
                 withAnimation {
                     self.consoleLog.append(response)
@@ -91,7 +91,7 @@ class RepositoryFunctionsViewModel: ObservableObject{
     }
     func Push(){
         DispatchQueue.main.async {
-            let response = try? self.safeShell("cd \(self.path); git push \(self.selectedBranch)")
+            let response = try? self.safeShell("cd \(self.path); git push origin \(self.selectedBranch)")
             if let response{
                 withAnimation {
                     self.consoleLog.append(response)
