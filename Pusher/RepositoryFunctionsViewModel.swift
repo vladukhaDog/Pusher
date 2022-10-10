@@ -33,7 +33,9 @@ class RepositoryFunctionsViewModel: ObservableObject{
     func fetchBranches(){
         self.branches = []
         var array = ((try? safeShell("cd \(self.path); git branch -r;")) ?? "").split(whereSeparator: \.isNewline)
-        array.removeFirst()
+        array.removeAll { kn in
+            kn.contains("->")
+        }
         if !array.isEmpty{
             for item in array{
                 self.branches.append("\(item)")
