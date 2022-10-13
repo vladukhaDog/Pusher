@@ -34,9 +34,11 @@ class RepositoryFunctionsViewModel: ObservableObject{
         DispatchQueue.global(qos: .background).async {
             let response = try? self.safeShell("cd \(self.path); \(self.consoleMessage)")
             if let response{
-                withAnimation {
-                    self.commitMessage = ""
-                    self.consoleLog.append(response)
+                DispatchQueue.main.async{
+                    withAnimation {
+                        self.commitMessage = ""
+                        self.consoleLog.append(response)
+                    }
                 }
             }
         }
