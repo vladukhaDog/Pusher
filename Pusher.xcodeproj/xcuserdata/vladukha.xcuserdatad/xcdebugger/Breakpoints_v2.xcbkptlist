@@ -3,4 +3,54 @@
    uuid = "9C5DA61A-7ABF-4984-BF29-D4AF0A699FBD"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2988BD09-FE23-4C6F-9266-1D383CB9B6B6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pusher/RepositoryFunctionsViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "init(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2988BD09-FE23-4C6F-9266-1D383CB9B6B6 - 6fb889035d8e684c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Pusher.RepositoryFunctionsViewModel.init(Swift.String) -&gt; Pusher.RepositoryFunctionsViewModel"
+                  moduleName = "Pusher"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladukha/Developer/Pusher/Pusher/RepositoryFunctionsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "820">
+               </Location>
+               <Location
+                  uuid = "2988BD09-FE23-4C6F-9266-1D383CB9B6B6 - 6fb889035d8e684c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Pusher.RepositoryFunctionsViewModel.init(Swift.String) -&gt; Pusher.RepositoryFunctionsViewModel"
+                  moduleName = "Pusher"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladukha/Developer/Pusher/Pusher/RepositoryFunctionsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "1252">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

@@ -30,26 +30,9 @@ class RepositoryFunctionsViewModel: ObservableObject{
         self.getRepoName()
     }
     
-    func fetchBranches(){
-        self.branches = []
-        var array = ((try? safeShell("cd \(self.path); git branch -r;")) ?? "").split(whereSeparator: \.isNewline)
-        array.removeAll { kn in
-            kn.contains("->")
-        }
-        if !array.isEmpty{
-            for item in array{
-                self.branches.append("\(item.replacingOccurrences(of: "origin/", with: ""))")
-            }
-        }
-        
-        if let first = self.branches.first{
-            selectedBranch = first
-        }
-    }
-    
-    func commitnPush(){
-        DispatchQueue.main.async {
-            let response = try? self.safeShell("cd \(self.path);git add .; git commit -m \"\(self.commitMessage)\"; git push origin \(self.selectedBranch)")
+    func consoleExecute(){
+        DispatchQueue.global(qos: .background).async {
+            let response = try? self.safeShell("cd \(self.path); \(self.consoleMessage)")
             if let response{
                 withAnimation {
                     self.commitMessage = ""
@@ -58,49 +41,96 @@ class RepositoryFunctionsViewModel: ObservableObject{
             }
         }
     }
+    
+    func fetchBranches(){
+        self.branches = []
+            
+            var array = ((try? self.safeShell("cd \(self.path); git branch -r;")) ?? "").split(whereSeparator: \.isNewline)
+            array.removeAll { kn in
+                kn.contains("->")
+            }
+            DispatchQueue.main.async{
+                withAnimation{
+                    if !array.isEmpty{
+                        for item in array{
+                            self.branches.append("\(item.replacingOccurrences(of: "origin/", with: ""))")
+                        }
+                    }
+                    if !self.branches.contains(self.selectedBranch){
+                        if let first = self.branches.first{
+                            self.selectedBranch = first
+                        }
+                    }
+                    
+                }
+            }
+        
+    }
+    
+    func commitnPush(){
+        DispatchQueue.global(qos: .background).async {
+            let response = try? self.safeShell("cd \(self.path);git add .; git commit -m \"\(self.commitMessage)\"; git push origin \(self.selectedBranch)")
+            if let response{
+                DispatchQueue.main.async{
+                    withAnimation {
+                        self.commitMessage = ""
+                        self.consoleLog.append(response)
+                    }
+                }
+            }
+        }
+    }
     func getRepoName() {
-        DispatchQueue.main.async {
+        DispatchQueue.global(qos: .background).async {
             let response = try? self.safeShell("cd \(self.path); git config --get remote.origin.url")
             if let response{
                 let arr = response.components(separatedBy: "/")
-                withAnimation {
-                    self.repoName = arr.last ?? ""
+                DispatchQueue.main.async{
+                    withAnimation {
+                        self.repoName = arr.last ?? ""
+                    }
                 }
             }
         }
     }
     func updateCheckout(){
-        DispatchQueue.main.async {
+        DispatchQueue.global(qos: .background).async {
             let response = try? self.safeShell("cd \(self.path); git checkout \(self.selectedBranch);")
             if let response{
-                withAnimation {
-                    self.consoleLog.append(response)
+                DispatchQueue.main.async{
+                    withAnimation {
+                        self.consoleLog.append(response)
+                    }
                 }
             }
         }
     }
     func Pull(){
-        DispatchQueue.main.async {
+        DispatchQueue.global(qos: .background).async {
             let response = try? self.safeShell("cd \(self.path); git pull origin \(self.selectedBranch)")
             if let response{
-                withAnimation {
-                    self.consoleLog.append(response)
+                DispatchQueue.main.async{
+                    withAnimation {
+                        self.consoleLog.append(response)
+                    }
                 }
             }
         }
     }
     func Push(){
-        DispatchQueue.main.async {
+        DispatchQueue.global(qos: .background).async {
             let response = try? self.safeShell("cd \(self.path); git push origin \(self.selectedBranch)")
             if let response{
-                withAnimation {
-                    self.consoleLog.append(response)
+                DispatchQueue.main.async{
+                    withAnimation {
+                        self.consoleLog.append(response)
+                    }
                 }
             }
         }
     }
     func Commit(){
-        DispatchQueue.main.async {
+        DispatchQueue.global(qos: .background).async {
             let response = try? self.safeShell("cd \(self.path); git add .; git commit -m \"\(self.commitMessage)\"; ")
             if let response{
                 withAnimation {

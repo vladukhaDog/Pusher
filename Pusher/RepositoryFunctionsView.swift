@@ -17,7 +17,10 @@ struct RepositoryFunctionsView: View {
             Text(vm.repoName)
                 .font(.largeTitle)
             HStack{
-                consoleLogView
+                VStack(spacing: 0){
+                    consoleLogView
+                    commandTextField
+                }
                 VStack(alignment: .leading){
                     branchPicker
                     commitTextField
@@ -107,23 +110,20 @@ struct RepositoryFunctionsView: View {
         
     }
     private var consoleLogView: some View{
-        ScrollView {
-            VStack{
-                ForEach(vm.consoleLog, id: \.self){message in
-                    Text(message)
-                    Divider()
-                }
-            }
-//            Text(vm.consoleLog)
-                .frame(maxWidth: .infinity)
-                .padding()
-                .rotationEffect(.degrees(-180))
-                .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
-        }
-        .frame(maxWidth: .infinity)
-        .rotationEffect(.degrees(180))
-        .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
-        .background(Color.primary.colorInvert().opacity(0.3).cornerRadius(15))
+//        ScrollView {
+//            VStack{
+        TextEditor(text: .constant(vm.consoleLog.joined(separator: "\n")))
+//            }
+////            Text(vm.consoleLog)
+//                .frame(maxWidth: .infinity)
+//                .padding()
+//                .rotationEffect(.degrees(-180))
+//                .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+//        }
+//        .frame(maxWidth: .infinity)
+//        .rotationEffect(.degrees(180))
+//        .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+//        .background(Color.primary.colorInvert().opacity(0.3).cornerRadius(15))
     }
     private var branchPicker: some View{
             Picker("", selection: $vm.selectedBranch) {
@@ -146,6 +146,50 @@ struct RepositoryFunctionsView: View {
         .padding(8)
         .background(Color.primary.colorInvert().opacity(0.3).cornerRadius(15))
         .textFieldStyle(.plain)
+    }
+    @State private var showingCommandLine = false
+    private var commandTextField: some View{
+        HStack(spacing: 0){
+            if showingCommandLine{
+                HStack{
+                    TextField("Console command", text: $vm.consoleMessage, onCommit: {
+                        vm.consoleExecute()
+                    })
+                    .padding(8)
+                    .background(Color.primary.colorInvert().opacity(0.3).cornerRadius(15))
+                    .textFieldStyle(.plain)
+                    Button {
+                        vm.consoleExecute()
+                    } label: {
+                        Text("Exec")
+                    }
+
+                }
+                .id(showingCommandLine)
+                .transition(.move(edge: .top).combined(with: .opacity))
+            }else{Spacer()}
+            Button {
+                withAnimation {
+                    showingCommandLine.toggle()
+                }
+            } label: {
+                HStack(spacing: 1){
+                    Text("<")
+                        .font(.title)
+                        .rotation3DEffect(.degrees(showingCommandLine ? 180 : 0), axis: (x: 0, y: 1, z: 0))
+                    
+                    Text("/")
+                        .font(.title)
+                    
+                    Text(">")
+                        .font(.title)
+                        .rotation3DEffect(.degrees(showingCommandLine ? -180 : 0), axis: (x: 0, y: 1, z: 0))
+                }
+                .padding()
+            }
+            .buttonStyle(.plain)
+
+        }.clipped()
     }
 }
 
