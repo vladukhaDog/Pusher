@@ -12,7 +12,7 @@ class RepositoryFunctionsViewModel: ObservableObject{
     @Published var commitMessage: String = ""
     @Published var consoleMessage: String = ""
     @Published var branches: [String] = []
-    @Published var selectedBranch: String = ""
+    @Published var selectedBranch: String = ""//
     @Published var repoName: String = ""
     let path: String
     init(_ path: String){
