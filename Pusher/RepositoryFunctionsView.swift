@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import Foundation
+import Combine
+import AppKit
 
 struct RepositoryFunctionsView: View {
     @StateObject private var vm: RepositoryFunctionsViewModel
@@ -144,10 +147,11 @@ struct RepositoryFunctionsView: View {
             vm.commitnPush()
         })
         .padding(8)
-        .background(Color.primary.colorInvert().opacity(0.3).cornerRadius(15))
+        .background(Color.primary.colorInvert().opacity(0.3).cornerRadius(5))
         .textFieldStyle(.plain)
     }
     @State private var showingCommandLine = false
+    let commandBackColor = Color.black
     private var commandTextField: some View{
         HStack(spacing: 0){
             if showingCommandLine{
@@ -156,7 +160,7 @@ struct RepositoryFunctionsView: View {
                         vm.consoleExecute()
                     })
                     .padding(8)
-                    .background(Color.primary.colorInvert().opacity(0.3).cornerRadius(15))
+                    .background(Color.primary.colorInvert().opacity(0.3).cornerRadius(5))
                     .textFieldStyle(.plain)
                     Button {
                         vm.consoleExecute()
@@ -165,6 +169,8 @@ struct RepositoryFunctionsView: View {
                     }
 
                 }
+                .frame(height: 50)
+                .background(commandBackColor)
                 .id(showingCommandLine)
                 .transition(.move(edge: .top).combined(with: .opacity))
             }else{Spacer()}
@@ -186,9 +192,11 @@ struct RepositoryFunctionsView: View {
                         .rotation3DEffect(.degrees(showingCommandLine ? -180 : 0), axis: (x: 0, y: 1, z: 0))
                 }
                 .padding()
+                .background(commandBackColor)
+                .frame(height: 50)
             }
             .buttonStyle(.plain)
-
+            .background(commandBackColor)
         }.clipped()
     }
 }
@@ -198,3 +206,20 @@ struct RepositoryFunctionsView_Previews: PreviewProvider {
         RepositoryFunctionsView("TESTINGOS")
     }
 }
+
+//
+//extension View{
+//    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+//            clipShape( RoundedCorner(radius: radius, corners: corners) )
+//        }
+//}
+//struct RoundedCorner: Shape {
+//
+//    var radius: CGFloat = .infinity
+//    var corners: UIRectCorner = .allCorners
+//
+//    func path(in rect: CGRect) -> Path {
+//        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+//        return Path(path.cgPath)
+//    }
+//}
