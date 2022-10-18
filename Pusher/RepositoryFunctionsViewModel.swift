@@ -20,15 +20,26 @@ class RepositoryFunctionsViewModel: ObservableObject{
         
         self.path = path
         fetchBranches()
-        if let branch = UserDefaults.standard.string(forKey: "branchFor/\(path)"){
-            if let branchFromCache = self.branches.first(where: { br in
-                br.contains(branch)
-            }){
-                selectedBranch = branchFromCache
-                updateCheckout()
+        selectCurrentCheckoutBranch()
+//        if let branch = UserDefaults.standard.string(forKey: "branchFor/\(path)"){
+//            if let branchFromCache = self.branches.first(where: { br in
+//                br.contains(branch)
+//            }){
+//                selectedBranch = branchFromCache
+//                updateCheckout()
+//            }
+//        }
+        self.getRepoName()
+    }
+    
+    private func selectCurrentCheckoutBranch(){
+        let response = try? self.safeShell("cd \(self.path); git branch")
+        if let response{
+            let array = response.split(whereSeparator: \.isNewline)
+            if let foundSelectedBranch = array.first(where: {$0.contains("*")}){
+                selectedBranch = foundSelectedBranch.replacingOccurrences(of: "* ", with: "")
             }
         }
-        self.getRepoName()
     }
     
     func consoleExecute(){
@@ -56,7 +67,7 @@ class RepositoryFunctionsViewModel: ObservableObject{
                 withAnimation{
                     if !array.isEmpty{
                         for item in array{
-                            self.branches.append("\(item.replacingOccurrences(of: "origin/", with: ""))")
+                            self.branches.append("\(item.replacingOccurrences(of: "origin/", with: "").replacingOccurrences(of: " ", with: ""))")
                         }
                     }
                     if !self.branches.contains(self.selectedBranch){
