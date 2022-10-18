@@ -25,6 +25,7 @@ class RepositoryFunctionsViewModel: ObservableObject{
                 br.contains(branch)
             }){
                 selectedBranch = branchFromCache
+                updateCheckout()
             }
         }
         self.getRepoName()
@@ -51,7 +52,7 @@ class RepositoryFunctionsViewModel: ObservableObject{
             array.removeAll { kn in
                 kn.contains("->")
             }
-            DispatchQueue.main.async{
+//            DispatchQueue.main.async{
                 withAnimation{
                     if !array.isEmpty{
                         for item in array{
@@ -64,7 +65,7 @@ class RepositoryFunctionsViewModel: ObservableObject{
                         }
                     }
                     
-                }
+//                }
             }
         
     }
